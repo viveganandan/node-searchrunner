@@ -12,4 +12,8 @@ The solution is contained within a docker container.  It is a node js app using 
 
 `docker-compose up --scale searchrunner=3`
 
-`http://localhost:8000/flights/search`
+Go to http://localhost:8000/flights/search
+
+## Stopping searchrunner
+
+`docker-compose down`
