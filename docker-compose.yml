@@ -9,7 +9,8 @@ services:
     volumes:
       - /var/run/docker.sock:/tmp/docker.sock:ro
   searchrunner:
-    image: middaysundonkey/searchrunner
+    build:
+      context: .
     environment:
       WEB_APP: host.docker.internal
       VIRTUAL_HOST: localhost
