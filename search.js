@@ -28,7 +28,7 @@ var searchProvider = (provider) => {
     return axios.get(`http://${webapp}:9000/scrapers/${provider}`);
 }
 
-var searchAllProviders = async () => {
+var searchAllProviders = () => {
     // Return promise to search all providers
     return new Promise((resolve, reject) => {
         // Create a promise for all providers
@@ -42,7 +42,7 @@ var searchAllProviders = async () => {
             for (let i = 0; i < res.length; i++) {
                 results = mergeResults(results, res[i].data.results);
             }
-            resolve(results);
+            resolve({results});
         }), (err) => {
             reject('Unable to search providers');
         });

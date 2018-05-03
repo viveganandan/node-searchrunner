@@ -27,12 +27,12 @@ app.get('/flights/search', (req, res) => {
         if (results) {
             res.json(JSON.parse(results));
         } else {
-            search.searchAllProviders(req.id).then((results) => {
+            search.searchAllProviders().then((results) => {
                 // Hold onto results for 60 seconds
                 client.setexAsync('resultscache', 60, JSON.stringify(results));
                 res.json(results);
             }, (err) => {
-                res.status(400).json({err});
+                res.status(400).json({results:[], err});
             });
         }
     });
