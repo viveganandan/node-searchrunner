@@ -2,7 +2,7 @@
 
 Attempting to solve problem https://github.com/Hipmunk/hipproblems/tree/master/searchrunner
 
-The solution is contained within a docker container.  It is a node js app using redis in the backend to cache the results with an expiration of 60 seconds.  The node app is behind nginx, which helps us load balance requests.  You can specify how many upstream servers nginx should load balance to using the --scale option when executing `docker-compose`.
+The solution is contained within a docker container.  It is a node js app with varnish cache operating as both a front-end cache and a load balancer.  Varnish load balances between 3 node servers.
 
 ## Requirements
 1. docker
@@ -11,7 +11,7 @@ The solution is contained within a docker container.  It is a node js app using 
 
 ## Starting searchrunner
 
-`docker-compose up --scale searchrunner=3`
+`docker-compose up`
 
 Go to http://localhost:8000/flights/search
 
