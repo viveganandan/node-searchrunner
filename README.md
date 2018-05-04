@@ -2,7 +2,7 @@
 
 Attempting to solve problem https://github.com/Hipmunk/hipproblems/tree/master/searchrunner
 
-The solution is contained within a docker container.  It is a node js app with varnish cache operating as both a front-end cache and a load balancer.  Varnish load balances between 3 node servers.
+The solution is contained within a docker container.  It is a node js app with varnish cache operating as both a front-end cache and a load balancer.  Varnish load balances between 3 node containers.
 
 ## Requirements
 1. docker
