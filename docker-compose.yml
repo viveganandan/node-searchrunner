@@ -1,26 +1,46 @@
 version: "3"
 services:
-  nginx:
-    image: jwilder/nginx-proxy
+  varnish:
+    image: jonbaldie/varnish
     ports:
       - 8000:80
+    links:
+      - searchrunner1
+      - searchrunner2
+      - searchrunner3
     depends_on:
-      - searchrunner
+      - searchrunner1
+      - searchrunner2
+      - searchrunner3
     volumes:
-      - /var/run/docker.sock:/tmp/docker.sock:ro
-  searchrunner:
+      - ./varnish/default.vcl:/etc/varnish/default.vcl
+  searchrunner1:
     build:
       context: .
     environment:
       WEB_APP: host.docker.internal
       VIRTUAL_HOST: localhost
-      REDIS_HOST: redis
     volumes:
       - .:/usr/src/app
     expose:
       - "8000"
-    depends_on:
-      - redis
-    command: ["npm", "start"]
-  redis:
-    image: redis
+  searchrunner2:
+    build:
+      context: .
+    environment:
+      WEB_APP: host.docker.internal
+      VIRTUAL_HOST: localhost
+    volumes:
+      - .:/usr/src/app
+    expose:
+      - "8000"
+  searchrunner3:
+    build:
+      context: .
+    environment:
+      WEB_APP: host.docker.internal
+      VIRTUAL_HOST: localhost
+    volumes:
+      - .:/usr/src/app
+    expose:
+      - "8000"
